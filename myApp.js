@@ -10,13 +10,9 @@ app.get('/', (req, res) => {
     res.sendFile(absolutePath);
 });
 
-app.get('/json', (req, res) => {
-    const response = 'Hello json';
-    if (process.env.MESSAGE_STYLE === 'uppercase') {
-        res.json({ message: response.toUpperCase() });
-    } else {
-        res.json({ message: response });
-    }
+app.get('/json', (req, res, next) => {
+    console.log(`${req.method} ${req.path} - ${req.ip}`);
+    next();
 });
 
 module.exports = app;
