@@ -1,10 +1,12 @@
 let express = require('express');
-require('dotenv').config();
+const bodyParser = require('body-parser');
 let app = express();
 
+require('dotenv').config();
 const absolutePath = __dirname + '/views/index.html';
 
 app.use('/public', express.static(__dirname + '/public'));
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/', (req, res) => {
     res.sendFile(absolutePath);
